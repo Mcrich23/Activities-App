@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         helloWorldLabel.text = "Hello World"
+        self.title = "First View"
         view.backgroundColor = .white
         view.addSubview(helloWorldLabel)
         
