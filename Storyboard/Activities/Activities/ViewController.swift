@@ -75,7 +75,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (self.activities.count) {
+        if indexPath.row == (self.activities.count) && !self.activities.isEmpty {
             self.fetchActivities(count: 5)
         }
     }
