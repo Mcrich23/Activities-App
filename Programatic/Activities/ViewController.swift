@@ -97,7 +97,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (self.activities.count) {
+        if indexPath.row == (self.activities.count) && !self.activities.isEmpty {
             let loadingCell = cell as! LoadingTableCell
             loadingCell.loading.startAnimating()
             self.fetchActivities(count: 5)
