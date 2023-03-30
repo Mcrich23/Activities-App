@@ -72,7 +72,7 @@ class ActivityTableCell: UITableViewCell {
     }
     
     func setupAccessablitity() -> UILabel {
-        let accessablity = Int(abs(0-(activity.accessibility*100)))
+        let accessablity = Int(abs(1-(activity.accessibility))*100)
         let label = UILabel()
         label.text = "Accessability: \(accessablity)%"
         label.font = .systemFont(ofSize: 13)
