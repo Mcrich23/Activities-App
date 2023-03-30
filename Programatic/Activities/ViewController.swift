@@ -34,6 +34,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         activitiesTableView.delegate = self
         activitiesTableView.register(ActivityTableCell.self, forCellReuseIdentifier: "activityCell")
         activitiesTableView.register(LoadingTableCell.self, forCellReuseIdentifier: "loadingCell")
+        activitiesTableView.estimatedRowHeight = 60.0
+        activitiesTableView.rowHeight = UITableView.automaticDimension
         activitiesTableView.isHidden = true
         
         // Loading Setup
@@ -71,10 +73,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell", for: indexPath) as! LoadingTableCell
             return cell
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        65
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
