@@ -24,6 +24,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.view.backgroundColor = .white
         
         // Table Setup
+        setupTable()
+        // Loading Setup
+        setupLoading()
+        // Fetch Activities
+        fetchActivities(count: 20)
+    }
+    
+    func setupTable() {
         view.addSubview(activitiesTableView)
         activitiesTableView.translatesAutoresizingMaskIntoConstraints = false
         activitiesTableView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
@@ -36,17 +44,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         activitiesTableView.register(LoadingTableCell.self, forCellReuseIdentifier: "loadingCell")
         activitiesTableView.estimatedRowHeight = 60.0
         activitiesTableView.rowHeight = UITableView.automaticDimension
-        activitiesTableView.isHidden = true
-        
-        // Loading Setup
+//        activitiesTableView.isHidden = true
+    }
+    
+    func setupLoading() {
         loading.hidesWhenStopped = true
         view.addSubview(loading)
         loading.startAnimating()
         loading.translatesAutoresizingMaskIntoConstraints = false
         loading.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loading.centerYAnchor.constraint(equalTo:view.centerYAnchor).isActive = true
-        
-        self.fetchActivities(count: 20)
     }
     
     func fetchActivities(count: Int) {
@@ -67,7 +74,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row <= (self.activities.count-1) && !self.activities.isEmpty {
-            let cell = ActivityTableCell(style: .default, reuseIdentifier: "activityCell", activity: activities[indexPath.row])
+            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityTableCell
+            cell.setActivity(for: activities[indexPath.row])
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell", for: indexPath) as! LoadingTableCell
