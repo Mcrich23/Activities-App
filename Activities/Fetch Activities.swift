@@ -7,15 +7,13 @@
 
 import Foundation
 
-class Activities {
+struct Activities {
     static func fetchActivity() async throws -> Activity {
-        let url = URL(string: "https://www.boredapi.com/api/activity")!
+        guard let url = URL(string: "https://www.boredapi.com/api/activity") else { return .blank }
         
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await URLSession.shared.data(from: url)
         
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { return .blank }
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         let activity = try jsonDecoder.decode(Activity.self, from: data)

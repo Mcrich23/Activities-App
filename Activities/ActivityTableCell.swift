@@ -17,12 +17,6 @@ class ActivityTableCell: UITableViewCell {
         setup()
      }
     
-//    init(style: UITableViewCell.CellStyle, reuseIdentifier: String?, activity: Activity) {
-//        self.activity = activity
-//        super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        setup()
-//     }
-    
     func setActivity(for activity: Activity) {
         nameLabel.text = activity.name
         typeLabel.text = "Type: \(activity.type)"
@@ -56,7 +50,8 @@ class ActivityTableCell: UITableViewCell {
     }
 
      required init?(coder aDecoder: NSCoder) {
-       super.init(coder: aDecoder)
+         super.init(coder: aDecoder)
+         setup()
     }
     
     func setupName() {
